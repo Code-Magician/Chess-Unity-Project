@@ -65,7 +65,7 @@ namespace Chess.Scripts.Core
 
             while (
                 steps-->0 && 
-                ChessPathHighlighter.DoNotHasPieceAt(
+                PieceChecker.DoNotHasPieceAt(
                     row + rowMultiplier*offset, 
                     col + colMultiplier*offset, 
                     color
@@ -78,7 +78,7 @@ namespace Chess.Scripts.Core
                     color
                 );
 
-                if (ChessPathHighlighter.HasPieceAt(
+                if (PieceChecker.HasPieceAt(
                     row + rowMultiplier*offset, 
                     col + colMultiplier*offset, 
                     GetOppositeColor(color)

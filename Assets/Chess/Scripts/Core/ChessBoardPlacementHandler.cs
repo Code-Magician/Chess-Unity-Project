@@ -4,14 +4,19 @@ using System.Diagnostics.CodeAnalysis;
 using Chess.Scripts.Core;
 
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public sealed class ChessBoardPlacementHandler : MonoBehaviour {
-    [SerializeField] private GameObject[] _rowsArray;
+public sealed class ChessBoardPlacementHandler : MonoBehaviour 
+{
+    internal static ChessBoardPlacementHandler Instance;
+
+    [Header("Player Path Highlighter Prefabs")]
     [SerializeField] private GameObject _blackPlayerHighlightPrefab, _whitePlayerHighlightPrefab;
+
+    [Header("Chess Board Rows")]
+    [SerializeField] private GameObject[] _rowsArray;
 
     private GameObject[,] _chessBoard;
     private GameObject[,] _blackPieces, _whitePieces;
 
-    internal static ChessBoardPlacementHandler Instance;
 
     private void Awake() {
         Instance = this;
@@ -70,7 +75,6 @@ public sealed class ChessBoardPlacementHandler : MonoBehaviour {
                 foreach (Transform childTransform in tile.transform) {
                     Destroy(childTransform.gameObject);
                 }
-
             }
         }
     }
@@ -79,20 +83,27 @@ public sealed class ChessBoardPlacementHandler : MonoBehaviour {
         int row = playerHandler.GetRow();
         int col = playerHandler.GetCol();
 
-        if (playerHandler.GetPieceColor() == PIECECOLOR.BLACK)
-            _blackPieces[row, col] = playerHandler.transform.gameObject;
-        else if (playerHandler.GetPieceColor() == PIECECOLOR.WHITE)
-            _whitePieces[row, col] = playerHandler.transform.gameObject;
+        switch(playerHandler.GetPieceColor())
+        {
+            case PIECECOLOR.BLACK:
+                _blackPieces[row, col] = playerHandler.transform.gameObject; break;
+            case PIECECOLOR.WHITE:
+                _whitePieces[row, col] = playerHandler.transform.gameObject; break;
+        }
 
     }
 
-    internal GameObject GetPiece(int row, int col, PIECECOLOR color) {
-        if (color == PIECECOLOR.BLACK)
-            return _blackPieces[row, col];
-        else if (color == PIECECOLOR.WHITE)
-            return _whitePieces[row, col];
-
-        return null;
+    internal GameObject GetPiece(int row, int col, PIECECOLOR color) 
+    {
+        switch(color)
+        {
+            case PIECECOLOR.BLACK:
+                return _blackPieces[row, col];
+            case PIECECOLOR.WHITE:
+                return _whitePieces[row, col];
+            default: 
+                return null;
+        }
     }
 
 

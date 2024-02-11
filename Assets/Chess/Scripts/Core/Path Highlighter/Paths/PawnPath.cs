@@ -21,8 +21,8 @@ namespace Chess.Scripts.Core
                 }
 
                 
-                if (ChessPathHighlighter.DoNotHasPieceAt(mRow, col, color) &&
-                    ChessPathHighlighter.DoNotHasPieceAt(
+                if (PieceChecker.DoNotHasPieceAt(mRow, col, color) &&
+                    PieceChecker.DoNotHasPieceAt(
                         mRow, 
                         col, 
                         oppositeColor
@@ -37,10 +37,10 @@ namespace Chess.Scripts.Core
 
             // Diagonal Attack
             int aRow = row + (color == PIECECOLOR.BLACK ? 1 : -1);
-            if (ChessPathHighlighter.HasPieceAt(aRow, col + 1, oppositeColor))
+            if (PieceChecker.HasPieceAt(aRow, col + 1, oppositeColor))
                 ChessBoardPlacementHandler.Instance.Highlight(aRow, col + 1, color);
 
-            if (ChessPathHighlighter.HasPieceAt(aRow, col - 1, oppositeColor))
+            if (PieceChecker.HasPieceAt(aRow, col - 1, oppositeColor))
                 ChessBoardPlacementHandler.Instance.Highlight(aRow, col - 1, color);
         }
     }

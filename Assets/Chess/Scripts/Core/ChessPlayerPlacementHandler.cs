@@ -28,6 +28,7 @@ namespace Chess.Scripts.Core
             ChessPathHighlighter.HighlightPath(color, type, row, col);
         }
 
+
         internal int GetRow() { return row; }
         internal int GetCol() { return col; }
         internal PIECECOLOR GetPieceColor() { return color; }

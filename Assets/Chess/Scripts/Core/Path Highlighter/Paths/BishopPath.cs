@@ -4,53 +4,10 @@ namespace Chess.Scripts.Core
     {
         internal static void Path(int row, int col, PIECECOLOR color)
         {
-            PIECECOLOR oppositeColor = (
-                color == PIECECOLOR.BLACK ?
-                PIECECOLOR.WHITE :
-                PIECECOLOR.BLACK
-            );
-
-
-            // Top-Right Diagonal
-            int offset = 1;
-            while (ChessPathHighlighter.DoNotHasPieceAt(row + offset, col + offset, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row + offset, col + offset, color);
-                if (ChessPathHighlighter.HasPieceAt(row + offset, col + offset, oppositeColor)) break;
-
-                offset++;
-            }
-
-            // Top-Left Diagonal
-            offset = 1;
-            while (ChessPathHighlighter.DoNotHasPieceAt(row + offset, col - offset, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row + offset, col - offset, color);
-                if(ChessPathHighlighter.HasPieceAt(row + offset, col - offset, oppositeColor)) break;
-
-                offset++;
-            }
-
-            // Down-Right Diagonal
-            offset = 1;
-            while (ChessPathHighlighter.DoNotHasPieceAt(row - offset, col + offset, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row - offset, col + offset, color);
-                if (ChessPathHighlighter.HasPieceAt(row - offset, col + offset, oppositeColor)) break;
-
-                offset++;
-            }
-
-
-            // Down-Left Diagonal
-            offset = 1;
-            while (ChessPathHighlighter.DoNotHasPieceAt(row - offset, col - offset, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row - offset, col - offset, color);
-                if(ChessPathHighlighter.HasPieceAt(row - offset, col - offset, oppositeColor)) break;
-
-                offset++;
-            }
+            Traverse.From(row, col, DIRECTION.TOPLEFT, color);
+            Traverse.From(row, col, DIRECTION.TOPRIGHT, color);
+            Traverse.From(row, col, DIRECTION.BOTTOMLEFT, color);
+            Traverse.From(row, col, DIRECTION.BOTTOMRIGHT, color);
         }
     }
 }

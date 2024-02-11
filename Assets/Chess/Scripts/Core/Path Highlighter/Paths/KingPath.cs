@@ -4,53 +4,17 @@ namespace Chess.Scripts.Core
     {
         internal static void Path(int row, int col, PIECECOLOR color)
         {
-            // Top
-            if (ChessPathHighlighter.DoNotHasPieceAt(row + 1, col, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row + 1, col, color);
-            }
+            Traverse.From(row, col, DIRECTION.TOP, color, 1);
+            Traverse.From(row, col, DIRECTION.BOTTOM, color, 1);
 
-            // Top-Right
-            if (ChessPathHighlighter.DoNotHasPieceAt(row + 1, col + 1, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row + 1, col + 1, color);
-            }
+            Traverse.From(row, col, DIRECTION.LEFT, color, 1);
+            Traverse.From(row, col, DIRECTION.RIGHT, color, 1);
 
-            // Right
-            if (ChessPathHighlighter.DoNotHasPieceAt(row, col + 1, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row, col + 1, color);
-            }
-
-            // Down-Right
-            if (ChessPathHighlighter.DoNotHasPieceAt(row - 1, col + 1, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row - 1, col + 1, color);
-            }
-
-            // Down
-            if (ChessPathHighlighter.DoNotHasPieceAt(row - 1, col, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row - 1, col, color);
-            }
-
-            // Down-Left
-            if (ChessPathHighlighter.DoNotHasPieceAt(row - 1, col - 1, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row - 1, col - 1, color);
-            }
-
-            // Left
-            if (ChessPathHighlighter.DoNotHasPieceAt(row, col - 1, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row, col - 1, color);
-            }
-
-            // Top-Left
-            if (ChessPathHighlighter.DoNotHasPieceAt(row + 1, col - 1, color))
-            {
-                ChessBoardPlacementHandler.Instance.Highlight(row + 1, col + -1, color);
-            }
+            Traverse.From(row, col, DIRECTION.TOPLEFT, color, 1);
+            Traverse.From(row, col, DIRECTION.TOPRIGHT, color, 1);
+            
+            Traverse.From(row, col, DIRECTION.BOTTOMLEFT, color, 1);
+            Traverse.From(row, col, DIRECTION.BOTTOMRIGHT, color, 1);
         }
     }
 }
